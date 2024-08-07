@@ -12,7 +12,7 @@ public class Top10RatedMoviesJob {
 
         System.out.println("\n Starting Top 10 Spark Job \n");
 
-        return ratingsDataset.filter(col("numVotes").geq(500))
+        Dataset<Row> top10Rated = ratingsDataset.filter(col("numVotes").geq(500))
                 .withColumn("ranking", functions.expr("numVotes / " + averageNumberOfVotes + " * averageRating"))
                 .withColumn("ranking", bround(col("ranking"), 2))
                 .join(movieDataset, "tconst")
@@ -20,5 +20,7 @@ public class Top10RatedMoviesJob {
                 .select("tconst", "primaryTitle", "ranking")
                 .orderBy(functions.desc("ranking"))
                 .limit(10);
+
+        return top10Rated;
     }
 }

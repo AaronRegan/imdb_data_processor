@@ -11,9 +11,10 @@ public class MostOftenCreditedJob {
         System.out.println("\n Starting Most Credited Spark Job \n");
 
         // Split the 'knownForTitles' column into individual movie IDs
+        Dataset<Row> creditsExploded = creditsDataset
+                .withColumn("titleId", explode(split(col("knownForTitles"), ",")));
 
-        return creditsDataset
-                .withColumn("titleId", explode(split(col("knownForTitles"), ",")))
+        Dataset<Row> creditsTop10 = creditsExploded
                 .join(top10Movies, col("titleId").equalTo(top10Movies.col("tconst")))
                 .groupBy("nconst", "primaryName")
                 .agg(
@@ -22,5 +23,7 @@ public class MostOftenCreditedJob {
                 )
                 .orderBy(col("count").desc())
                 .limit(10);
+
+        return creditsTop10;
     }
 }
