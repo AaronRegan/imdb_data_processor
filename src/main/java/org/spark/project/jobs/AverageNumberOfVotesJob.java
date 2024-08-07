@@ -10,13 +10,13 @@ public class AverageNumberOfVotesJob {
 
     public double run(Dataset<Row> ratingsDataset) {
 
-        // Filter movies with fewer than 500 votes
+        System.out.println("\n Starting Average Number of Votes Job \n");
+
         double averageNumberOfVotes = ratingsDataset
                 .filter(col("numVotes").geq(500))
                 .agg(functions.avg("numVotes")).first().getDouble(0);
 
-        // Print the result to the console
-        System.out.println("Average Number of Votes: " + averageNumberOfVotes);
+        System.out.println("\n Average Number of Votes: " + averageNumberOfVotes);
 
         return averageNumberOfVotes;
     }

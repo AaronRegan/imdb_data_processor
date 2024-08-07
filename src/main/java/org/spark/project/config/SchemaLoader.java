@@ -8,7 +8,13 @@ public class SchemaLoader {
     private static final StructType movieSchema = new StructType()
             .add("tconst", DataTypes.StringType, false)
             .add("titleType", DataTypes.StringType, false)
-            .add("primaryTitle", DataTypes.StringType, false);
+            .add("primaryTitle", DataTypes.StringType, false)
+            .add("originalTitle", DataTypes.StringType, true)
+            .add("isAdult", DataTypes.BooleanType, false)
+            .add("startYear", DataTypes.IntegerType, true)
+            .add("endYear", DataTypes.IntegerType, true)
+            .add("runtimeMinutes", DataTypes.IntegerType, true)
+            .add("genres", DataTypes.StringType, true);
 
     private static final StructType ratingSchema = new StructType()
             .add("tconst", DataTypes.StringType, false)

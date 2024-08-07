@@ -28,7 +28,7 @@ From the root folder execute:
 
 **Run**
 
-`spark-submit --class org.spark.project.MovieSparkApp ./target/MovieSparkApp-1.0-SNAPSHOT.jar`
+`spark-submit --class org.spark.project.MovieSparkApp ./target/MovieSparkApp-1.0-SNAPSHOT.jar [logLevel=< INFO|ERROR|WARN|FINE >]`
 
 **Jobs**
 
