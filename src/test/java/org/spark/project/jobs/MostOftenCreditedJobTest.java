@@ -37,7 +37,7 @@ public class MostOftenCreditedJobTest {
     }
 
     @Test
-    public void testRun() {
+    public void testCalculateMostCreditedCorrectly() {
         // Sample data for top 10 movies
         List<Row> top10Data = Arrays.asList(
                 RowFactory.create("tt0000001", "title1", 50),

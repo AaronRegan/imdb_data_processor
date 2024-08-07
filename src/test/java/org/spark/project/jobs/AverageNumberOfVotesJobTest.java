@@ -34,7 +34,7 @@ public class AverageNumberOfVotesJobTest {
     }
 
     @Test
-    public void testRun() {
+    public void testCalculateAverageNumberOfVotesCorrectly() {
         // Sample data
         List<Row> data = Arrays.asList(
                 RowFactory.create("tt0000001", 5.7, 1000),
