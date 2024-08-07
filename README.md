@@ -4,7 +4,7 @@
 
 In order to run the solution locally, you first need to make sure to meet the following requirements:
 
-- [**Java 8**](https://openjdk.java.net/install/)
+- Java 11
 - [**Maven 3.x**](https://maven.apache.org/download.cgi)
 - [**Spark 3.5.x**](https://spark.apache.org/downloads.html)
 
@@ -37,4 +37,4 @@ The Spark Application runs 3 Jobs;
 * Calculate Average Number of Votes cast for movie ratings
 * Calculate the Top 10 Rated movies according to the following forumla
   * (numVotes/averageNumberOfVotes) * averageRating
-* Calculate the top 10 actors that feature the most in the top 10 rated titles
+* Calculate the top 10 credited people that feature in the top 10 rated titles
