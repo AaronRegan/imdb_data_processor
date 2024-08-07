@@ -24,7 +24,7 @@ From the root folder execute:
 
 **Compile**
 
-`mvn package -f java/pom.xml`
+`mvn package`
 
 **Run**
 
