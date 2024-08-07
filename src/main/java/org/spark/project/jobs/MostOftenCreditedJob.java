@@ -19,7 +19,8 @@ public class MostOftenCreditedJob {
                         count("*").as("count"),
                         collect_list("primaryTitle").as("movieTitles")
                 )
-                .orderBy(col("count").desc());
+                .orderBy(col("count").desc())
+                .limit(10);
 
         System.out.println(creditsInTop10.showString(10,0,false));
 

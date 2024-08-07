@@ -42,8 +42,8 @@ public class MostOftenCreditedJobTest {
         List<Row> top10Data = Arrays.asList(
                 RowFactory.create("tt0000001", "title1", 50),
                 RowFactory.create("tt0000002", "title2", 60),
-                RowFactory.create("tt0000004", "title3", 70),
-                RowFactory.create("tt0000005", "title4", 80)
+                RowFactory.create("tt0000003", "title3", 70),
+                RowFactory.create("tt0000004", "title4", 80)
         );
 
         StructType top10Schema = new StructType()
@@ -57,8 +57,7 @@ public class MostOftenCreditedJobTest {
         // Sample data for credits
         List<Row> creditsData = Arrays.asList(
                 RowFactory.create("nm0000001", "Fred Astaire", 1899, 1987, "actor,miscellaneous,producer", "tt0000001,tt0000002"),
-                RowFactory.create("nm0000002", "Gene Kelly", 1912, 1996, "actor,miscellaneous,producer", "tt0000004,tt0000005"),
-                RowFactory.create("nm0000003", "John Doe", 1900, 1975, "director", "tt0000006,tt0000007")
+                RowFactory.create("nm0000002", "Gene Kelly", 1912, 1996, "actor,miscellaneous,producer", "tt0000004,tt0000003")
         );
 
         // Create DataFrame for credits

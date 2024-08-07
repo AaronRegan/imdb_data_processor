@@ -11,9 +11,9 @@ import org.spark.project.jobs.Top10RatedMoviesJob;
 
 public class MovieSparkApp {
 
-    private static final String RATINGS_CSV_FILE = "/Users/aaronregan/Files/Work/2024/tasks/toyota/title.ratings.tsv";
-    private static final String MOVIES_CSV_FILE = "/Users/aaronregan/Files/Work/2024/tasks/toyota/title.basics.tsv";
-    private static final String CREDITS_CSV_FILE = "/Users/aaronregan/Files/Work/2024/tasks/toyota/name.basics.tsv";
+    private static final String RATINGS_CSV_FILE = "/dataset/title.ratings.tsv";
+    private static final String MOVIES_CSV_FILE = "/dataset/title.basics.tsv";
+    private static final String CREDITS_CSV_FILE = "/dataset/name.basics.tsv";
     private static final String SPARK_APP_NAME = "MoviesSparkApp";
 
     public static void main(String... args)  {
@@ -50,18 +50,16 @@ public class MovieSparkApp {
         Dataset<Row> result = new MostOftenCreditedJob().run(top10Rated, creditsDataset);
 
         System.out.println("Spark Jobs Completed");
-        System.out.println("\\n");
-        System.out.println(top10Rated.showString(10,0,false));
-        System.out.println("\\n");
-        System.out.println(result.showString(10,0,false));
+        spark.stop();
     }
 
     private static Dataset<Row> readCsvIntoDataframe(SparkSession s, String filename, StructType schema) {
+        String fullPath = System.getProperty("user.dir").concat(filename);
         return s.read()
                 .format("csv")
                 .option("delimiter", "\t")
                 .option("header", "true").schema(schema)
-                .load(filename);
+                .load(fullPath);
     }
 
 }
