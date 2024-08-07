@@ -4,10 +4,12 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.functions;
 
+import static org.apache.spark.sql.functions.col;
+
 public class Top10RatedMoviesJob {
     public Dataset<Row> run(Dataset<Row> ratingsDataset, Dataset<Row> movieDataset, double averageNumberOfVotes) {
 
-        Dataset<Row> top10WithTitles = ratingsDataset.filter("numVotes >= 500")
+        Dataset<Row> top10WithTitles = ratingsDataset.filter(col("numVotes").geq(500))
                 .withColumn("ranking", functions.expr("numVotes / " + averageNumberOfVotes + " * averageRating"))
                 .join(movieDataset, "tconst")
                 .filter("titleType = 'movie'")
