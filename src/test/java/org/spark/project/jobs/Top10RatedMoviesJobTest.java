@@ -57,12 +57,9 @@ public class Top10RatedMoviesJobTest {
         Dataset<Row> ratingsDataset = spark.createDataFrame(data, SchemaLoader.getRatingSchema());
         Dataset<Row> moviesDataset = spark.createDataFrame(movies, SchemaLoader.getMovieSchema());
 
-        // Define the average number of votes
-        double averageNumberOfVotes = 800.0;
-
         // Run the job
         Top10RatedMoviesJob job = new Top10RatedMoviesJob();
-        Dataset<Row> top10Movies = job.run(ratingsDataset, moviesDataset, averageNumberOfVotes);
+        Dataset<Row> top10Movies = job.run(ratingsDataset, moviesDataset);
 
         // Assert expected number of rows
         assertEquals(4, top10Movies.count());
@@ -77,7 +74,7 @@ public class Top10RatedMoviesJobTest {
         assertEquals("tt0000004", result.get(3).getString(0));
 
         // Validate rankingScore for the top result (tt0000005)
-        assertEquals(13.6875, result.get(0).getDouble(2), 0.01);
+        assertEquals(10.43, result.get(0).getDouble(2), 0.01);
     }
 
     @Test
@@ -104,12 +101,9 @@ public class Top10RatedMoviesJobTest {
         Dataset<Row> ratingsDataset = spark.createDataFrame(data, SchemaLoader.getRatingSchema());
         Dataset<Row> moviesDataset = spark.createDataFrame(movies, SchemaLoader.getMovieSchema());
 
-        // Define the average number of votes
-        double averageNumberOfVotes = 800.0;
-
         // Run the job
         Top10RatedMoviesJob job = new Top10RatedMoviesJob();
-        Dataset<Row> top10Movies = job.run(ratingsDataset, moviesDataset, averageNumberOfVotes);
+        Dataset<Row> top10Movies = job.run(ratingsDataset, moviesDataset);
 
         // Assert expected number of rows
         assertEquals(3, top10Movies.count());
@@ -123,6 +117,27 @@ public class Top10RatedMoviesJobTest {
         assertEquals("tt0000004", result.get(2).getString(0));
 
         // Validate rankingScore for the top result (tt0000005)
-        assertEquals(13.6875, result.get(0).getDouble(2), 0.01);
+        assertEquals(10.43, result.get(0).getDouble(2), 0.01);
+    }
+
+    @Test
+    public void getAverageNumberOfVotes(){
+        List<Row> data = Arrays.asList(
+                RowFactory.create("tt0000001", 5.7, 1000),
+                RowFactory.create("tt0000002", 7.3, 1500),
+                RowFactory.create("tt0000004", 6.5, 700),
+                RowFactory.create("tt0000005", 9.0, 1000)
+        );
+
+        // Create a DataFrame
+        Dataset<Row> ratingsDataset = spark.createDataFrame(data, SchemaLoader.getRatingSchema());
+
+        // Run the job
+        Top10RatedMoviesJob job = new Top10RatedMoviesJob();
+
+        double result = job.getAverageNumberOfVotes(ratingsDataset);
+
+        double expectedAverage = 4200.0 / 4;
+        assertEquals(expectedAverage, result, 0.01);
     }
 }

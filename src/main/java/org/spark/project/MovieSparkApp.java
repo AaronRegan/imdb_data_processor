@@ -5,7 +5,6 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.StructType;
 import org.spark.project.config.SchemaLoader;
-import org.spark.project.jobs.AverageNumberOfVotesJob;
 import org.spark.project.jobs.MostOftenCreditedJob;
 import org.spark.project.jobs.Top10RatedMoviesJob;
 
@@ -68,9 +67,7 @@ public class MovieSparkApp {
 
         System.out.println("\n Data Loading Complete, Starting Spark Jobs \n");
 
-        double averageRating =  new AverageNumberOfVotesJob().run(ratingsDataset);
-
-        Dataset<Row> top10Rated = new Top10RatedMoviesJob().run(ratingsDataset, moviesDataset, averageRating);
+        Dataset<Row> top10Rated = new Top10RatedMoviesJob().run(ratingsDataset, moviesDataset);
 
         System.out.println(top10Rated.showString(10,0,false));
 
