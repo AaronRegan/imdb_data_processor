@@ -35,6 +35,6 @@ From the root folder execute:
 The Spark Application runs 3 Jobs;
 
 * Calculate Average Number of Votes cast for movie ratings
-* Calculate the Top 10 Rated movies according to the following forumla
+* Calculate the Top 10 Rated movies according to the following formula
   * (numVotes/averageNumberOfVotes) * averageRating
 * Calculate the top 10 credited people that feature in the top 10 rated titles
